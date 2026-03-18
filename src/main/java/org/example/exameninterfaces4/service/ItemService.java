@@ -2,6 +2,7 @@ package org.example.exameninterfaces4.service;
 
 import org.example.exameninterfaces4.model.Item;
 import org.example.exameninterfaces4.repository.ItemRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ItemService {
-
+    @Autowired
     private ItemRepository itemRepository;
 
     public List<Item>findAll(){
