@@ -41,8 +41,41 @@ public class ItemController {
 
     // Mandar la edicion
     @PostMapping("/{id}/editar")
-    public String procesarEdicion(@PathVariable String id, @ModelAttribute Item item) {
-        itemService.updateItem(id, item);
-        return "redirect:/items/" + id;
+    public String procesarEdicion(
+            @PathVariable String id,
+            @RequestParam String title,
+            @RequestParam Double price,
+            @RequestParam String description,
+            @RequestParam String category,
+            @RequestParam(required = false) String image,
+            @RequestParam(required = false) Double rate,
+            @RequestParam Integer count,
+            @RequestParam(required = false) String color,
+            @RequestParam(required = false) String EAN,
+            @RequestParam String manufacturer,
+            Model model) {
+
+        try {
+            // Crear objeto Item con los datos del formulario
+            Item itemActualizado = new Item();
+            itemActualizado.setTitle(title);
+            itemActualizado.setPrice(price);
+            itemActualizado.setDescription(description);
+            itemActualizado.setCategory(category);
+            itemActualizado.setImage(image);
+            itemActualizado.setRate(rate);
+            itemActualizado.setCount(count);
+            itemActualizado.setColor(color);
+            itemActualizado.setEAN(EAN);
+            itemActualizado.setManufacturer(manufacturer);
+
+            // Actualizar
+            itemService.updateItem(id, itemActualizado);
+            return "redirect:/items/" + id;
+
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al actualizar: " + e.getMessage());
+            return "redirect:/items/" + id + "/editar";
+        }
     }
 }

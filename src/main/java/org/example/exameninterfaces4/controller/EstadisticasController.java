@@ -21,8 +21,8 @@ public class EstadisticasController {
         long totalItems = itemService.countTotalItems();
         model.addAttribute("totalItems", totalItems);
 
-        // Items con stock bajo (menos de 10 unidades)
-        model.addAttribute("stockBajo", itemService.findByStockBajo(10));
+        // Items con stock bajo (menos de 100 unidades)
+        model.addAttribute("stockBajo", itemService.findByStockBajo(100));
 
         // Listado de fabricantes (solo nombres)
         model.addAttribute("fabricantes", itemService.getAllManufacturers());
